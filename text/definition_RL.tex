@@ -1,0 +1,55 @@
+$\TT := \ZZp$ は時間を表す集合とする。
+\begin{definition}[Markov Desition Process]
+    $\CS, \CA$ : 有限集合とする。次の関数、
+    \begin{enumerate}
+        \item[初期分布] $p_0 : \CS \to [0, 1]$ s.t. $\displaystyle\sum_{s\in\CS} p_0(s) = 1$
+        \item[遷移確率] $p_T : \CS \times \CS \times \CA \to [0, 1]$ s.t.
+                                        $\displaystyle\sum_{s^\prime\in\CS} p_T(s^\prime, s, a) = 1$
+        \item[報酬関数] $g : \CS \times \CA \to \RR$
+    \end{enumerate}
+    を定義したときの5つの組 $(\CS, \CA, p_0, p_T, g)$ をマルコフ決定過程 (MDP) といい、この時の集合 $\CS, \CA$ をそれぞれ、状態集合、行動集合と呼ぶ。
+\end{definition}
+\begin{definition}[adapt]
+    $M$ : MDP に対して、確率空間 $(\Omega, \FF, \PP)$ とその上の確率過程 $(S_t, A_t)_{t\in\TT}$ が性質
+    \begin{align}
+        p_0(s) &= \PP(S_0 = 0) \\
+        p_T(s^\prime, s, a) &= \PP(S_t = s^\prime|S_{t-1} = s, A_{t-1} = a) \\
+        &= \PP(S_t = s^\prime|S_{t-1} = s, A_{t-1} = a, S_{t-2} = s_{t-2}, A_{t-2} = a_{t-2}, \ldots, S_0 = s_0, A_0 ~= a_0)
+    \end{align}
+    を満たすとき、適合しているという\footnote{
+        ここの存在性は、数式一行目はまあ存在しますが、二行目は $(S_t, A_t)$ がマルコフ性を満たせば
+        \[
+            \PP(S_t = s | \cdots) = \PP(S_t = s, A_t \in \CA | \cdots) = \sum_{a \in \CA}\PP(S_t = s, A_t = a | \cdots)
+        \]
+        であることから言えます。
+    }。
+\end{definition}
+
+\newpage
+
+\begin{definition}[policy]
+    $\pi : \CS \times \CA \to [0, 1]$ s.t. $\displaystyle\sum_{a\in\CA} \pi(a | s) = 1$ となる関数 $\pi$ を確率方策という。特に、どんな状態 $s$ に対してもある行動 $a_s$ があって、 $\pi(a_s | s) = 1$ となるとき、$\pi$ は決定的であるという。
+    確率方策全体の集合を $\Pi$、特に決定的方策全体の集合を $\Pi^d$ と表記する。
+\end{definition}
+
+\begin{definition}[Markov Policy]
+    確率方策の列 $\bm{\pi} = (\pi_t)_{t\in\TT}$ をマルコフ方策といい、マルコフ方策全体の集合を $\Pi^M$ と表記する。
+    特に、決定的方策の列 $\bm{\pi} = (\pi_t^d)_{t\in\TT}$ 全体の集合を $\Pi^{MD}$ とする。
+\end{definition}
+
+\begin{definition}[adapt (名前募集？)]
+    マルコフ決定過程 $M$ に適合する確率過程 $(S_t, A_t)$ が「マルコフ方策 $\bm{\pi}$ に適合している」とは任意の時間、状態、行動 $t, s, a$ に対しても
+    \[
+        \PP(A_t = a | S_t = s) = \pi_t(a | s)
+    \]
+    が成り立つときのことを指す。% このような確率過程 $(S_t, A_t)$ を、$M(\bm{\pi})$ と表す。
+\end{definition}
+
+\begin{proposition}[Markov Property]
+    MDP $M$ と マルコフ方策 $\pi$ に適合した確率過程 $(S_t, A_t)$ について、以下の性質を満たす。 \\
+    $\fal t \in \TT, \fal a_i \in \CA, \fal s_i \in \CS \ (i \in \TT \text{s.t.\ } i \leq t + 1)$ について、
+    \begin{align}
+        \PP(S_{t + 1} = s_{t + 1}, A_{t + 1} = a_{t + 1} | S_{i} = s_{i}, A_{i} = a_{i} : i \leq t) = \PP(S_t = s_t, A_t = a_t | S_{t-1} = s_{t-1}, A_{t-1} = a_{t-1})
+    \end{align}
+    が成り立つ。
+\end{proposition}

@@ -1,0 +1,30 @@
+\usepackage{listings}
+\lstset{%
+    language=Python,
+    basicstyle={\ttfamily},
+    breaklines=true,
+    columns=[l]{fullflexible},
+    lineskip=-0.5zw,
+}
+% \newtheoremstyle{mystyle}%      % スタイル名
+%     {}%                         % 上部スペース
+%     {}%                         % 下部スペース
+%     {\normalfont}%              % 本文フォント
+%     {}%                         % インデント量
+%     {\bf}%                      % 見出しフォント
+%     {}%                         % 見出し後の句読点, '.'
+%     {\newline}%                        % 見出し後のスペース, ' ' or \newline
+%     {\underline{\thmname{#1}\thmnumber{#2.}\thmnote{ - #3}}}%
+%                                 % 見出しの書式 (can be left empty, meaning `normal')
+% \theoremstyle{mystyle}      % スタイルの適用
+
+\newtheoremstyle{examplestyle}% name of the style to be used
+   {10mm}% measure of space to leave above the theorem. E.g.: 3pt
+   {10mm}% measure of space to leave below the theorem. E.g.: 3pt
+   {\slshape}% name of font to use in the body of the theorem
+   {6pt}% measure of space to indent
+   {\bfseries}% name of head font
+   {}% punctuation between head and body
+   {\newline}% space after theorem head
+   {\underline{\thmname{#1}\thmnumber{#2.}\thmnote{ - #3}}}% Manually specify head
+\theoremstyle{examplestyle}
