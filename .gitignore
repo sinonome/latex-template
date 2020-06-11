@@ -1,0 +1,7 @@
+*.pdf
+
+# tex
+*.aux
+*.synctex.gz
+*.log
+*.vscode/
